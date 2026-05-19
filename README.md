@@ -376,7 +376,7 @@ Paste:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://lp2_user:lp2password123@cluster0.tki1kaj.mongodb.net/taskmanager?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=
 JWT_SECRET=sarthak123
 ```
 
