@@ -1,0 +1,19 @@
+# BASE IMAGE SETUP
+FROM node:20-alpine 
+WORKDIR /app
+
+# BACKEND DEPENDENCY INSTALLATION 
+COPY backend/package*.json ./backend/
+RUN  cd backend && npm install 
+
+# FRONTEND COMPILATION (PRODUCTION BUILD)
+COPY frontend ./frontend 
+RUN cd frontend && npm run build 
+
+# BACKEND CODE INTERATION 
+COPY backend ./backend
+
+# EXECUTION ENVIORNMENT
+WORKDIR /app/backend
+EXPOSE 5000
+CMD ["node", "index.js"]
