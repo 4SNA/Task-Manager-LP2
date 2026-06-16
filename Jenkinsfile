@@ -11,13 +11,9 @@ pipeline {
     stages {
         stage('Deploy on EC2') {
             steps {
-                withCredentials([sshUserPrivateKey(
-                    credentialsId: 'ec2-ssh-key',
-                    keyFileVariable: 'SSH_KEY',
-                    usernameVariable: 'SSH_USER'
-                )]) {
+                sshagent(['ec2-ssh-key']) {
                     sh '''
-                    ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no $SSH_USER@$EC2_HOST "
+                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST "
                         if [ ! -d $APP_NAME ]; then
                             git clone https://github.com/4SNA/Task-Manager-LP2.git $APP_NAME
                         fi
